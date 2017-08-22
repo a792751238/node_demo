@@ -8,8 +8,11 @@ const requestHandlers = require('./requestHandlers');
 
 let handle = {};
 
-handle["/"] = requestHandlers.start;
+//路由列表
+handle["/"] = requestHandlers.init;
+handle["/index"] = requestHandlers.init;
 handle["/start"] = requestHandlers.start;
 handle["/upload"] = requestHandlers.upload;
+handle["/show"] = requestHandlers.show;
 
 server.start(router.route, handle);
