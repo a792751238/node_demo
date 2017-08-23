@@ -65,7 +65,6 @@ function start(response, request) {
 
 function upload(response, request) {
     console.log("Request handler 'upload' was called.");
-
     let form = new formidable.IncomingForm();
     form.uploadDir = `${baseUrl}`;//上传文件的保存路径
     form.keepExtensions = true;//保存扩展名

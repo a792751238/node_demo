@@ -7,7 +7,7 @@ function route(handle, pathname, response, request) {
     //将处理函数关联数组赋值
     let func = handle[pathname];
     if (typeof func === 'function') {
-        return func(response, request,pathname);
+        return func(response, request, pathname);
     } else {
         console.log(`No request handler has be found for ${pathname}`);
         response.writeHead(404, {'Content-type': 'text/plain'});
