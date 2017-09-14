@@ -11,6 +11,7 @@ const cookieParser = require('cookie-parser');
 const utils = require('./pratice/utils');
 const userModel = require('./models/user_base');
 
+let registerRouter = require('./routes/register');
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(multer({dest: '/tmp'}).array('image'));
@@ -25,12 +26,7 @@ app.set("view cache", true);
 app.set("view engine", "ejs");
 
 //注册  
-app.get('/reg', function (req, res) {
-    res.render('reg/reg', {
-        title: '注册',
-        // pwd_err: req.session.pwd_err
-    });
-});
+app.get('/register', registerRouter);
 
 //注册提交  
 app.post('/reg', function (req, res) {
