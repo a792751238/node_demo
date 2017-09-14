@@ -1,17 +1,15 @@
 /**
- * Created by easterCat on 2017/9/14.
+ * Created by easterCat on 2017/9/12.
  */
-
-
 const connect = require('../config/connect');
 const mongodb = require('mongodb');
 const ObjectID = mongodb.ObjectID;
 
-var insertData = function (db, data, callback) {
+var insertData = function (db, callback) {
     //连接到表 site
     var collection = db.collection('site');
     //插入数据
-    var data = data;
+    var data = [{"name": "菜鸟教程", "url": "www.runoob.com"}, {"name": "菜鸟工具", "url": "c.runoob.com"}];
     collection.insert(data, function (err, result) {
         if (err) {
             console.log('Error:' + err);
@@ -20,11 +18,11 @@ var insertData = function (db, data, callback) {
         callback(result);
     });
 };
-var selectData = function (db, data, callback) {
+var selectData = function (db, callback) {
     //连接到表
     var collection = db.collection('site');
     //查询数据
-    var whereStr = data;
+    var whereStr = {"name": '菜鸟教程'};
     collection.find(whereStr).toArray(function (err, result) {
         if (err) {
             console.log('Error:' + err);
@@ -62,27 +60,21 @@ var delData = function (db, callback) {
 };
 
 
-var addUser = function (data) {
-    connect.open(function (err, db) {
-        console.log("连接成功！");
-        insertData(db, data, function (result) {
-            console.log(result);
-            db.close();
-        });
+connect.open(function (err, db) {
+    insertData(db, function (result) {
+        console.log(result);
+        db.close();
     });
-};
-
-var queryUser = function (data, callback) {
-    connect.open(function (err, db) {
-        console.log("连接成功！");
-        selectData(db, data, function (result) {
-            callback(result);
-            db.close();
-        });
+    selectData(db, function (result) {
+        console.log(result);
+        db.close();
     });
-};
-
-module.exports = {
-    addUser,
-    queryUser
-};
+    updateData(db, function (result) {
+        console.log(result);
+        db.close();
+    });
+    delData(db, function (result) {
+        console.log(result);
+        db.close();
+    });
+});

@@ -46,7 +46,7 @@ app.post('/process_post', bodyParser.urlencoded({
 
 app.get('/list_user', (request, response) => {
     console.log('/list_user这是用户列表');
-    fs.readFile(__dirname + "/" + "user.json", 'utf8', (err, data) => {
+    fs.readFile(__dirname + "/" + "User.json", 'utf8', (err, data) => {
         console.log(data);
         response.end(data);
     });
@@ -54,7 +54,7 @@ app.get('/list_user', (request, response) => {
 
 app.get('/add_user', (request, response) => {
     console.log('/add_user这是添加用户列表');
-    fs.readFile(__dirname + "/" + "user.json", 'utf8', (err, data) => {
+    fs.readFile(__dirname + "/" + "User.json", 'utf8', (err, data) => {
         let jsonlength = 1;
         data = JSON.parse(data);
         for (let item in data) {
@@ -68,7 +68,7 @@ app.get('/add_user', (request, response) => {
             "id": jsonlength
         };
         data[`user${jsonlength}`] = new_data;
-        fs.writeFile(__dirname + "/" + "user.json", JSON.stringify(data), (err) => {
+        fs.writeFile(__dirname + "/" + "User.json", JSON.stringify(data), (err) => {
             if (err) {
                 console.log(err);
             }
@@ -79,7 +79,7 @@ app.get('/add_user', (request, response) => {
 });
 
 app.get('/:id', (request, response) => {
-    fs.readFile(__dirname + '/' + 'user.json', 'utf8', (err, data) => {
+    fs.readFile(__dirname + '/' + 'User.json', 'utf8', (err, data) => {
         data = JSON.parse(data);
         let user = data[`user${request.params.id}`];
         console.log(user);
@@ -88,10 +88,10 @@ app.get('/:id', (request, response) => {
 });
 
 app.get('/delete_user/:id', (request, response) => {
-    fs.readFile(__dirname + '/' + 'user.json', 'utf8', (err, data) => {
+    fs.readFile(__dirname + '/' + 'User.json', 'utf8', (err, data) => {
         data = JSON.parse(data);
         delete data[`user${request.params.id}`];
-        fs.writeFile(__dirname + '/' + 'user.json', JSON.stringify(data), (err) => {
+        fs.writeFile(__dirname + '/' + 'User.json', JSON.stringify(data), (err) => {
             if (err) {
                 console.log(err);
             }

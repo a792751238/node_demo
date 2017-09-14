@@ -1,0 +1,30 @@
+<%- include("../layout/header.ejs") %>
+<div class="body flex center">  
+    <div class="index-main">  
+        <div class="index-header">  
+            <h1 class="logo"></h1>  
+            <p class="describe">一条大河波浪宽</p>  
+        </div>  
+        <div class="form-name flex center">   
+            <a class="form-active" href="/reg">注册</a>  
+            <a href="/login">登录</a>  
+        </div>  
+        <div class="index-form">  
+            <form method="post" action="/reg">
+                <div class="form-item">  
+                     <input type="input" name="email" placeholder="邮箱"/>  
+                </div>  
+                <div class="form-item">  
+                    <input type="password" name="pwd" placeholder="密码（大于六位）">  
+                </div>  
+                <div class="form-item">  
+                    <input type="password" name="repeatpwd" placeholder="确定密码">  
+                </div>  
+                <div class="button-item">  
+                    <input class="btn btn-sure" type="submit" value="注册">  
+                </div>  
+            </form>  
+        </div>  
+    </div>  
+</div>  
+<%- include("../layout/footer.ejs") %>

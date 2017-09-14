@@ -1,0 +1,100 @@
+<%- include("../layout/header.ejs") %>
+
+<div class="body">
+
+    <div class="main">
+        <form method="POST" id="userform"
+              enctype="multipart/form-data">
+            <div class="form-item useravatar" id="useravatar">
+
+                <em class="cover" id="cover"></em>
+                <input class="input-file item-val" type="file" id="input-file" name="userhead">
+            </div>
+            <div class="form-item">
+                <div class="flex center">
+                    <span class="profile-name">暂未填写</span>
+                    <a class="modify-btn" data-type="center" href="javascript:">修改</a>
+                </div>
+                <div class="modify-content flex-center-h">
+                    <input class="modify-name item-val" type="text" placeholder="请填写昵称" name="username">
+                    <a href="javascript:;" class="btn btn-cancel">取消</a>
+                    <a href="javascript:;" class="btn btn-sure">确定</a>
+                </div>
+            </div>
+            <div class="form-item flex">
+                <div class="item-name">职业</div>
+                <div>
+                    <p class="modify-msg flex">
+                        <span class="modify-file">暂未填写</span>
+                        <a class="modify-btn" data-type="com" href="javascript:;">修改</a>
+                    </p>
+                    <div class="modify-content flex-center-h">
+                        <input class="modify-name item-val" type="text" placeholder="请输入职业" name="userwork">
+                        <a href="javascript:;" class="btn btn-cancel">取消</a>
+                        <a href="javascript:;" class="btn btn-sure">确定</a>
+                    </div>
+                </div>
+            </div>
+            <div class="form-item flex">
+                <div class="item-name">学位</div>
+                <div>
+                    <p class="modify-msg flex">
+                        <span class="modify-file">暂未填写</span>
+                        <a class="modify-btn" data-type="com" href="javascript:;">修改</a>
+                    </p>
+                    <div class="modify-content flex-center-h">
+                        <input class="modify-name item-val" type="text" placeholder="请输入学位" name="userdegree">
+                        <a href="javascript:;" class="btn btn-cancel">取消</a>
+                        <a href="javascript:;" class="btn btn-sure">确定</a>
+                    </div>
+                </div>
+            </div>
+            <div class="form-item flex">
+                <div class="item-name">地区</div>
+                <div>
+                    <p class="modify-msg flex">
+                        <span class="modify-file">暂未填写</span>
+                        <a class="modify-btn" data-type="com" href="javascript:;">修改</a>
+                    </p>
+                    <div class="modify-content flex-center-h">
+                        <input class="modify-name item-val" type="text" placeholder="请填写地区" name="userarea">
+                        <a href="javascript:;" class="btn btn-cancel">取消</a>
+                        <a href="javascript:;" class="btn btn-sure">确定</a>
+                    </div>
+                </div>
+            </div>
+            <div class="form-item flex">
+                <div class="item-name">性别</div>
+                <div>
+                    <p class="modify-msg flex">
+                        <span class="modify-file">暂未填写</span>
+
+                        <a class="modify-btn" data-type="radio" href="javascript:;">修改</a>
+                    </p>
+                    <div class="modify-content flex-center-h">
+                        <label><input class="item-val" type="radio" name="usersex" value="1"> <em>男</em></label>
+                        <label><input class="item-val" type="radio" name="usersex" value="0"> <em>女</em></label>
+                        <a href="javascript:;" class="btn btn-cancel">取消</a>
+                        <a href="javascript:;" class="btn btn-sure">确定</a>
+                    </div>
+                </div>
+            </div>
+            <div class="form-item flex">
+                <div class="item-name">介绍自己</div>
+                <div>
+                    <p class="modify-msg flex">
+                        <span class="modify-file">暂未填写</span>
+                        <a class="modify-btn" data-type="com" href="javascript:;">修改</a>
+                    </p>
+                    <div class="modify-content modify-content-ta">
+                        <textarea class="modify-name item-val" placeholder="请简单的介绍自己" name="userintr"></textarea>
+                        <a href="javascript:;" class="btn btn-cancel">取消</a>
+                        <a href="javascript:;" class="btn btn-sure">确定</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<%- include("../layout/footer.ejs") %>
