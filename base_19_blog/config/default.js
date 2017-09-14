@@ -2,7 +2,7 @@
  * Created by easterCat on 2017/9/14.
  */
 module.exports = {
-    port: 3030,
+    port: 3000,
     session: {
         secret: 'myblog',
         key: 'myblog',
