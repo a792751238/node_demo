@@ -17,6 +17,7 @@ router.get('/', checkNotLogin, function(req, res, next) {
 
 // POST /signup 用户注册
 router.post('/', checkNotLogin, function(req, res, next) {
+    console.log(req);
     var name = req.fields.name;
     var gender = req.fields.gender;
     var bio = req.fields.bio;

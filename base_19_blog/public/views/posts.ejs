@@ -1,3 +1,5 @@
 <%- include('./layout/header') %>
-这是主页
+<% posts.forEach(function (post) { %>
+<%- include('./layout/post-content', { post: post }) %>
+<% }) %>
 <%- include('./layout/footer') %>
