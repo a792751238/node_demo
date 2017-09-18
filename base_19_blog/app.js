@@ -8,11 +8,13 @@
 var path = require('path');
 var express = require('express');
 var session = require('express-session');
+var winston = require('winston');
+var expressWinston = require('express-winston');
 var MongoStore = require('connect-mongo')(session);
 var flash = require('connect-flash');
 var config = require('config-lite')(__dirname);
 var routes = require('./routes');
-// const pkg = require('./package');
+var pkg = require('./package');
 var winston = require('winston');
 
 
@@ -62,12 +64,47 @@ app.use(function (req, res, next) {
     next();
 });
 
+// error page
+app.use(function (err, req, res, next) {
+    res.render('error', {
+        error: err
+    });
+});
+
+// 正常请求的日志
+app.use(expressWinston.logger({
+    transports: [
+        new (winston.transports.Console)({
+            json: true,
+            colorize: true
+        }),
+        new winston.transports.File({
+            filename: 'logs/success.log'
+        })
+    ]
+}));
 // 路由
 routes(app);
+// 错误请求的日志
+app.use(expressWinston.errorLogger({
+    transports: [
+        new winston.transports.Console({
+            json: true,
+            colorize: true
+        }),
+        new winston.transports.File({
+            filename: 'logs/error.log'
+        })
+    ]
+}));
 
-
-const server = app.listen(config.port, () => {
-    let host = server.address().address;
-    let port = server.address().port;
-    console.log(`应用实例，访问地址为 http://${host}:${port}`);
-});
+if (module.parent) {
+    module.exports = app;
+} else {
+    // 监听端口，启动程序
+    const server = app.listen(config.port, () => {
+        let host = server.address().address;
+        let port = server.address().port;
+        console.log(`${pkg.name}，访问地址为 http://${host}:${port}`);
+    });
+}
