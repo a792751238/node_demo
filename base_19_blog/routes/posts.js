@@ -7,6 +7,8 @@ var router = express.Router();
 var checkLogin = require('../middlewares/check').checkLogin;
 var PostModel = require('../models/posts');
 var CommentModel = require('../models/comments');
+
+
 // GET /posts 所有用户或者特定用户的文章页
 //   eg: GET /posts?author=xxx
 router.get('/', function (req, res, next) {
@@ -15,7 +17,7 @@ router.get('/', function (req, res, next) {
     PostModel.getPosts(author)
         .then(function (posts) {
             res.render('posts', {
-                posts: posts
+                posts: posts,
             });
         })
         .catch(next);

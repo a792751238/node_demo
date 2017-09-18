@@ -46,14 +46,14 @@ app.use(session({
 app.use(flash());
 // 处理表单及文件上传的中间件
 app.use(require('express-formidable')({
-    uploadDir: path.join(__dirname, 'public/images'),// 上传文件目录
+    uploadDir: path.join(__dirname, 'public/images'),// 上传头像文件目录
     keepExtensions: true// 保留后缀
 }));
 
 // 设置模板全局常量
 app.locals.blog = {
-    title: 'hello world',
-    description: 'hello world'
+    title: `博客`,
+    description: `这是一个博客`
 };
 
 // 添加模板必需的三个变量
