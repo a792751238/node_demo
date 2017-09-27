@@ -4,8 +4,10 @@
   "description": "the study about nodejs 17 module",
   "main": "index.js",
   "scripts": {
-    "test": "node --harmony ./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha",
-    "start": "node app.js"
+
+      "test": "node --harmony ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha",
+      "start": "cross-env NODE_ENV=production pm2 start app.js --node-args='--harmony' --name 'myblog'"
+
   },
   "author": "easterCat",
   "license": "ISC",

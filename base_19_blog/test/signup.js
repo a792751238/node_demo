@@ -1,6 +1,3 @@
-/**
- * Created by easterCat on 2017/9/18.
- */
 var path = require('path');
 var assert = require('assert');
 var request = require('supertest');
@@ -15,7 +12,7 @@ describe('signup', function () {
         beforeEach(function (done) {
             // 创建一个用户
             User.create({
-                name: testName1,
+                name: 'testName1',
                 password: '123456',
                 avatar: '',
                 gender: 'x',

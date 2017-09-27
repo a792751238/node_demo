@@ -59,6 +59,6 @@ app.use(function (req, res, next) {
 routes(app);
 
 // 监听端口，启动程序
-app.listen(3000, function () {
+app.listen(config.port, function () {
     console.log(`${pkg.name} listening on port ${config.port}`);
 });

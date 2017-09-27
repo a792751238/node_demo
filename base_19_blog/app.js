@@ -4,14 +4,13 @@
 var path = require('path');
 var express = require('express');
 var session = require('express-session');
-var winston = require('winston');
-var expressWinston = require('express-winston');
 var MongoStore = require('connect-mongo')(session);
 var flash = require('connect-flash');
 var config = require('config-lite')(__dirname);
 var routes = require('./routes');
 var pkg = require('./package');
 var winston = require('winston');
+var expressWinston = require('express-winston');
 
 
 let app = express();
@@ -68,17 +67,17 @@ app.use(function (err, req, res, next) {
 });
 
 // 正常请求的日志
-// app.use(expressWinston.logger({
-//     transports: [
-//         new (winston.transports.Console)({
-//             json: true,
-//             colorize: true
-//         }),
-//         new winston.transports.File({
-//             filename: 'logs/success.log'
-//         })
-//     ]
-// }));
+app.use(expressWinston.logger({
+    transports: [
+        new (winston.transports.Console)({
+            json: true,
+            colorize: true
+        }),
+        new winston.transports.File({
+            filename: 'logs/success.log'
+        })
+    ]
+}));
 // 路由
 routes(app);
 // 错误请求的日志
@@ -98,10 +97,9 @@ if (module.parent) {
     module.exports = app;
 } else {
     // 监听端口，启动程序
-    const server = app.listen(config.port, () = > {
-            let host = server.address().address;
-    let port = server.address().port;
-    console.log(`${pkg.name}，访问地址为 http://${host}:${port}`);
-})
-    ;
+    const server = app.listen(config.port, () => {
+        let host = server.address().address;
+        let port = server.address().port;
+        console.log(`${pkg.name}，访问地址为 http://localhost:${port}`);
+    });
 }

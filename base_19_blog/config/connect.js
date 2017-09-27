@@ -1,5 +1,5 @@
 const MongoClient = require('mongodb').MongoClient;
-const DB_CONN_STR = 'mongodb://localhost:27017/runoob';
+const DB_CONN_STR = 'mongodb://localhost:27017/myblog';
 
 const connect = {
     open: (callback) => {

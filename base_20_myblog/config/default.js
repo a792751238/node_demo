@@ -3,13 +3,13 @@
  */
 
 var config = {
-    port: 3000,
+    port: 3022,
     session: {
         secret: 'myblog',
         key: 'myblog',
         maxAge: '2592000000'
     },
-    mongodb: 'mongodb://localhost:27017/myblog'
+    mongodb: 'mongodb://easterCat:123456@ds062448.mlab.com:62448/mydatabase'
 };
 
 module.exports = config;
