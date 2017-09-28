@@ -13,7 +13,7 @@ var winston = require('winston');
 var expressWinston = require('express-winston');
 
 
-let app = express();
+var app = express();
 
 //挂载静态资源处理中间件
 app.use(express.static(__dirname + "/public"));
@@ -47,8 +47,8 @@ app.use(require('express-formidable')({
 
 // 设置模板全局常量
 app.locals.blog = {
-    title: `博客`,
-    description: `这是一个博客`
+    title: '博客',
+    description: '这是一个博客'
 };
 
 // 添加模板必需的三个变量
@@ -97,9 +97,9 @@ if (module.parent) {
     module.exports = app;
 } else {
     // 监听端口，启动程序
-    const server = app.listen(config.port, () => {
+    var server = app.listen(config.port, function () {
         let host = server.address().address;
         let port = server.address().port;
-        console.log(`${pkg.name}，访问地址为 http://localhost:${port}`);
+        console.log(pkg.name + '，访问地址为 http://localhost:' + port);
     });
 }
