@@ -3,8 +3,8 @@
  */
 var express = require('express');
 var router = express.Router();
-
 var checkLogin = require('../middlewares/check').checkLogin;
+//数据模型
 var PostModel = require('../models/posts');
 var CommentModel = require('../models/comments');
 
@@ -17,7 +17,7 @@ router.get('/', function (req, res, next) {
     PostModel.getPosts(author)
         .then(function (posts) {
             res.render('posts', {
-                posts: posts,
+                posts: posts
             });
         })
         .catch(next);

@@ -7,9 +7,9 @@
 
                 <% comments.forEach(function (comment) { %>
                 <div class="comment">
-            <span class="avatar">
-              <img src="../../images/<%= comment.author.avatar %>">
-            </span>
+                    <span class="avatar">
+                      <img src="../../images/<%= comment.author.avatar %>">
+                    </span>
                     <div class="content">
                         <a class="author" href="/posts?author=<%= comment.author._id %>"><%= comment.author.name %></a>
                         <div class="metadata">
@@ -25,7 +25,6 @@
                     </div>
                 </div>
                 <% }) %>
-
                 <% if (user) { %>
                 <form class="ui reply form" method="post" action="/posts/<%= post._id %>/comment">
                     <div class="field">
@@ -34,7 +33,6 @@
                     <input type="submit" class="ui icon button" value="留言"/>
                 </form>
                 <% } %>
-
             </div>
         </div>
     </div>
