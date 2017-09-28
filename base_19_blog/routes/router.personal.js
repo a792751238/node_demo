@@ -5,7 +5,7 @@ var express = require('express');
 var router = express.Router();
 var checkLogin = require('../middlewares/check');
 
-var UserModel = require('../models/users');
+var UserModel = require('../models/model.users');
 
 
 //GET /personal?author=<id>进入个人信息页面

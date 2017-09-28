@@ -5,8 +5,8 @@ var express = require('express');
 var router = express.Router();
 var checkLogin = require('../middlewares/check').checkLogin;
 //数据模型
-var PostModel = require('../models/posts');
-var CommentModel = require('../models/comments');
+var PostModel = require('../models/model.posts');
+var CommentModel = require('../models/model.comments');
 
 
 // GET /posts 所有用户或者特定用户的文章页

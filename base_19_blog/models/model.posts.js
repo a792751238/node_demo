@@ -1,6 +1,6 @@
 var marked = require('marked');
 var Post = require('../lib/mongo').Post;
-var CommentModel = require('./comments');
+var CommentModel = require('./model.comments');
 
 // 将 post 的 content 从 markdown 转换成 html
 Post.plugin('contentToHtml', {

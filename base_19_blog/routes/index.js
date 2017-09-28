@@ -5,11 +5,11 @@ module.exports = function (app) {
     app.get('/', function (req, res) {
         res.redirect('/posts');
     });
-    app.use('/signup', require('./signup'));
-    app.use('/signin', require('./signin'));
-    app.use('/signout', require('./signout'));
-    app.use('/posts', require('./posts'));
-    app.use('/personal', require('./personal'));
+    app.use('/signup', require('./router.signup'));
+    app.use('/signin', require('./router.signin'));
+    app.use('/signout', require('./router.signout'));
+    app.use('/posts', require('./router.posts'));
+    app.use('/personal', require('./router.personal'));
     // 404 page
     app.use(function (req, res) {
         if (!res.headersSent) {
