@@ -4,7 +4,7 @@
 const express = require('express');
 const router = express.Router();
 
-const {insert} = require('../lib/model/article.model');
+const {createArticle, getAllArticles} = require('../lib/model/article.model');
 
 router.get('/content02', (req, res) => {
     let article = {
@@ -23,8 +23,12 @@ router.post('/content02', (req, res) => {
         content: content
     };
 
-    insert(article);
+    createArticle(article);
     res.send(article);
+});
+
+router.get('/content03', (req, res) => {
+    getAllArticles(res);
 });
 
 module.exports = router;
