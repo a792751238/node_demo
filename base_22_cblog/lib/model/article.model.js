@@ -6,10 +6,10 @@ module.exports = {
     getAllArticles
 };
 
-const Article = require('../schema/article.schema');
+const ArticleModel = require('../schema/article.schema');
 
 function createArticle(data) {
-    let article = new Article({
+    let article = new ArticleModel({
         title: data.title,
         content: data.content,
         createDate: new Date()
@@ -25,9 +25,7 @@ function createArticle(data) {
 }
 
 function getAllArticles(response) {
-    let wherestr = {};
-
-    Article.find(wherestr, null, (error, result) => {
+    ArticleModel.find({}, null, (error, result) => {
         if (error) {
             console.log("Error:" + error);
         } else {

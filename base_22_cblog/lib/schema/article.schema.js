@@ -11,4 +11,6 @@ let ArticleSchema = new Schema({
     createDate: {type: Date} //创建时间
 });
 
-module.exports = mongoose.model('Article', ArticleSchema);
+const ArticleModel = mongoose.model('Article', ArticleSchema);//将Schema发布为Model
+
+module.exports = ArticleModel;
