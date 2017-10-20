@@ -3,7 +3,8 @@
  */
 module.exports = {
     createArticle,
-    getAllArticles
+    getAllArticles,
+    getOneArticleById
 };
 
 const ArticleModel = require('../schema/article.schema');
@@ -24,14 +25,24 @@ function createArticle(data) {
     });
 }
 
-function getAllArticles(response) {
+function getAllArticles(res) {
     ArticleModel.find({}, null, (error, result) => {
         if (error) {
             console.log("Error:" + error);
         } else {
-            console.log("Res:" + result);
-            response.send(result);
+            console.log("getAllArticles:" + result);
+            res.send(result);
         }
     });
 }
 
+function getOneArticleById(res, id) {
+    ArticleModel.findById(id, (error, result) => {
+        if (error) {
+            console.log("Error:" + error);
+        } else {
+            console.log("getOneArticleById:" + result);
+            res.send(result);
+        }
+    });
+}
