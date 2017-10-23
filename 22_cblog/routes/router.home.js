@@ -20,27 +20,34 @@ router.post('/createArticle', (req, res) => {
         title: title,
         content: content
     };
-
-    createArticle(article);
-    res.send(article);
+    createArticle(article).then((result) => {
+        console.log(result);
+        res.send(result);
+    });
 });
 
 // GET /articles 获取分页的文章
 router.get('/articles', (req, res) => {
     let where = req.query.where;
     where = JSON.parse(where);
-    getAllArticles(where, res);
+    getAllArticles(where).then((result) => {
+        res.send(result);
+    });
 });
 
 // GET  /article/:id 获取相应id号的文章
 router.get('/article/:articleid', (req, res) => {
     let id = req.params.articleid;
-    getOneArticleById(res, id);
+    getOneArticleById(id).then((result) => {
+        res.send(result);
+    });
 });
 
 router.delete('/article/:articleid', (req, res) => {
     let id = req.params.articleid;
-    deleteOneArticleById(res, id);
+    deleteOneArticleById(id).then((result) => {
+        res.send(result);
+    });
 });
 
 module.exports = router;
