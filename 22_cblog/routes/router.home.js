@@ -3,12 +3,13 @@
  */
 const express = require('express');
 const router = express.Router();
+const {contentsToMarked, contentToMarked} = require('../utils/marked');
 
 const {
     createArticle,
     getAllArticles,
     getOneArticleById,
-    deleteOneArticleById
+    delOneArticleById
 } = require('../lib/model/article.model');
 
 // POST /createArticle 创建一篇新文章
@@ -21,17 +22,17 @@ router.post('/createArticle', (req, res) => {
         content: content
     };
     createArticle(article).then((result) => {
-        console.log(result);
         res.send(result);
     });
 });
 
 // GET /articles 获取分页的文章
-router.get('/articles', (req, res) => {
-    let where = req.query.where;
-    where = JSON.parse(where);
-    getAllArticles(where).then((result) => {
-        res.send(result);
+router.get('/articles/:page', (req, res) => {
+    let page = req.params.page;
+    // where = JSON.parse(where);
+    getAllArticles(page).then((results) => {
+        results = contentsToMarked(results);
+        res.send(results);
     });
 });
 
@@ -39,13 +40,14 @@ router.get('/articles', (req, res) => {
 router.get('/article/:articleid', (req, res) => {
     let id = req.params.articleid;
     getOneArticleById(id).then((result) => {
+        result = contentToMarked(result);
         res.send(result);
     });
 });
 
 router.delete('/article/:articleid', (req, res) => {
     let id = req.params.articleid;
-    deleteOneArticleById(id).then((result) => {
+    delOneArticleById(id).then((result) => {
         res.send(result);
     });
 });

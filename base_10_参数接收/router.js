@@ -4,7 +4,7 @@
 let optfile = require('./optfile');
 let url = require('url');
 let querystring = require('querystring');  //post需导入
-let util = require('util');
+let util = require('utils');
 
 module.exports = {
     login: function (req, res) {

@@ -5,7 +5,7 @@ module.exports = {
     createArticle,
     getAllArticles,
     getOneArticleById,
-    deleteOneArticleById
+    delOneArticleById
 };
 
 const ArticleModel = require('../schema/article.schema');
@@ -21,10 +21,10 @@ function createArticle(data) {
         .create(article);
 }
 
-//获取所有的文章
-function getAllArticles(where, res) {
+//获取查询分页的文章
+function getAllArticles(page, res) {
     let pageSize = 10;                   //一页多少条
-    let currentPage = where.currentPage;                //当前第几页
+    let currentPage = page;                //当前第几页
     let sort = {'createDate': -1};        //排序（按创建时间倒序）
     let condition = {};                 //条件
     let skipnum = (currentPage - 1) * pageSize;   //跳过数
@@ -45,7 +45,7 @@ function getOneArticleById(article_id) {
 }
 
 //通过id删除一篇文章
-function deleteOneArticleById(id) {
+function delOneArticleById(id) {
     return ArticleModel
         .remove({_id: id})
         .exec();
