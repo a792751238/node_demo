@@ -23,7 +23,6 @@ let ArticleSchema = new Schema({
 });
 
 
-
 const ArticleModel = mongoose.model('Article', ArticleSchema);//将Schema发布为Model
 
 module.exports = ArticleModel;
