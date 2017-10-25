@@ -4,5 +4,6 @@
 const path = require('path');
 
 module.exports = {
-    publicPath: path.join(__dirname, './public/dist')
+    publicPath: path.join(__dirname, './public/dist'),
+    uploadPath: path.join(__dirname, './upload/picture'),
 };

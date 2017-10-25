@@ -11,6 +11,10 @@ let pictureSchema = new Schema({
         type: String,
         required: [true, 'name is required!']
     },
+    filename: {
+        type: String,
+        required: [true, 'filename is required!']
+    },
     path: {
         type: String,
         required: [true, 'path is required!']
