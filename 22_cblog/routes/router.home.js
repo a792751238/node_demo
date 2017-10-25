@@ -30,16 +30,16 @@ router.post('/createArticle', (req, res) => {
 // GET /articles 获取分页的文章
 router.get('/articles/:page', (req, res) => {
     let page = req.params.page;
-    // where = JSON.parse(where);
     getAllArticles(page)
         .then((results) => {
+            //再获取分页所有的文章之后，再获取所有文章的总数
             getAllArticlesCount().then((num) => {
+                results = contentsToMarked(results);
                 let obj = {
+                    articles: results,
                     count: num
                 };
-                Object.assign(results, obj);
-                results = contentsToMarked(results);
-                res.send(results);
+                res.send(obj);
             });
         });
 });
