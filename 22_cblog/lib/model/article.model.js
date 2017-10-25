@@ -12,7 +12,7 @@ module.exports = {
 const ArticleModel = require('../schema/article.schema');
 
 //创建一篇文章
-function createArticle(data) {
+function createArticle(data, res) {
     let article = {
         title: data.title,
         content: data.content,

@@ -3,10 +3,12 @@
  */
 
 
-module.exports = function(app) {
+module.exports = function (app) {
     app.get('/', (req, res) => {
         res.set('Content-Type', 'text/html');
         res.sendFile(config.publicPath + '/index.html');
     });
-    app.use('/home',require('./router.home'));
+    app.use('/home', require('./router.home'));
+    app.use('/file', require('./router.file'));
+    app.use('/user', require('./router.user'));
 };

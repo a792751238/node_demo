@@ -22,6 +22,7 @@ router.post('/createArticle', (req, res) => {
         title: title,
         content: content
     };
+
     createArticle(article).then((result) => {
         res.send(result);
     });

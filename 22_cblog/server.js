@@ -13,6 +13,7 @@ const app = express();
 
 // 设置静态文件目录
 app.use(express.static(path.join(__dirname, "./public/dist")));
+//解析post请求中body的格式
 app.use(bodyParser.urlencoded({extended: false}));
 // session 中间件   
 app.use(session({
@@ -27,6 +28,12 @@ app.use(session({
         url: config.mongodb// mongodb 地址
     })
 }));
+
+// 处理表单及文件上传的中间件
+// app.use(require('express-formidable')({
+//     uploadDir: path.join(__dirname, 'upload/picture'),// 上传文件目录
+//     keepExtensions: true// 保留后缀
+// }));
 
 //设置跨域访问
 app.all('*', (req, res, next) => {

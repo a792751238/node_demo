@@ -3,8 +3,6 @@
  */
 
 const mongoose = require('../db');
-const moment = require('moment-timezone')
-const {markedWithHighlight} = require('../../utils/marked');
 
 const Schema = mongoose.Schema;
 
