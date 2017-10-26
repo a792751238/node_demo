@@ -36,6 +36,8 @@ function contentsToMarked(as) {
  * @returns {*}
  */
 function contentToMarked(a) {
-    if (a) a.content = marked(a.content);
+    if (a) {
+        a.content = marked(a.content);
+    }
     return a;
 }

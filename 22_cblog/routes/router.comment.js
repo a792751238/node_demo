@@ -3,6 +3,7 @@
  */
 const express = require('express');
 const router = express.Router();
+const {contentsToMarked, contentToMarked} = require('../utils/marked');
 
 const {
     createComment,
@@ -23,6 +24,7 @@ router.post('/', (req, res) => {
     };
     createComment(comment)
         .then((result) => {
+            result = contentToMarked(result);
             res.send(result);
         })
 
@@ -33,6 +35,7 @@ router.get('/:articleid', (req, res) => {
 
     getCommentsById(articleid)
         .then((result) => {
+            result = contentsToMarked(result);
             res.send(result);
         })
         .catch((error) => {

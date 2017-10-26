@@ -25,6 +25,7 @@ router.post('/createArticle', (req, res) => {
     };
 
     createArticle(article).then((result) => {
+        result = contentToMarked(result);
         res.send(result);
     });
 });

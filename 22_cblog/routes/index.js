@@ -8,7 +8,7 @@ module.exports = function (app) {
         res.set('Content-Type', 'text/html');
         res.sendFile(config.publicPath + '/index.html');
     });
-    app.use('/home', require('./router.home'));
+    app.use('/home', require('./router.article'));
     app.use('/file', require('./router.file'));
     app.use('/user', require('./router.user'));
     app.use('/comment', require('./router.comment'));
