@@ -6,7 +6,8 @@ module.exports = {
     getAllArticles,
     getOneArticleById,
     delOneArticleById,
-    getAllArticlesCount
+    getAllArticlesCount,
+    increasePV
 };
 
 const ArticleModel = require('../schema/article.schema');
@@ -40,8 +41,11 @@ function getAllArticles(page) {
 
 //通过id获取一篇文章
 function getOneArticleById(article_id) {
+    // return ArticleModel
+    //     .findOne({_id: article_id})
+    //     .exec();
     return ArticleModel
-        .findOne({_id: article_id})
+        .findByIdAndUpdate(article_id, {$inc: {pv: 1}})
         .exec();
 }
 
@@ -56,5 +60,11 @@ function delOneArticleById(id) {
 function getAllArticlesCount() {
     return ArticleModel
         .count({})
+        .exec();
+}
+
+function increasePV(id) {
+    return ArticleModel
+        .update({_id: id}, {$inc: {pv: 1}})
         .exec();
 }

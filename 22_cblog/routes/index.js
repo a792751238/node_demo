@@ -11,4 +11,5 @@ module.exports = function (app) {
     app.use('/home', require('./router.home'));
     app.use('/file', require('./router.file'));
     app.use('/user', require('./router.user'));
+    app.use('/comment', require('./router.comment'));
 };

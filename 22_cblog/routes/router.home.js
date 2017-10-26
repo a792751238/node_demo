@@ -10,7 +10,8 @@ const {
     getAllArticles,
     getOneArticleById,
     delOneArticleById,
-    getAllArticlesCount
+    getAllArticlesCount,
+    increasePV
 } = require('../lib/model/article.model');
 
 // POST /createArticle 创建一篇新文章
@@ -48,6 +49,7 @@ router.get('/articles/:page', (req, res) => {
 // GET  /article/:id 获取相应id号的文章
 router.get('/article/:articleid', (req, res) => {
     let id = req.params.articleid;
+
     getOneArticleById(id)
         .then((result) => {
             result = contentToMarked(result);

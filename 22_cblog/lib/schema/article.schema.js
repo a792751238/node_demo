@@ -17,7 +17,10 @@ let ArticleSchema = new Schema({
     }, //内容
     createDate: {
         type: Date
-    } //创建时间
+    }, //创建时间
+    pv: {
+        type: Number
+    }//文章访问次数
 });
 
 

@@ -4,7 +4,6 @@
 
 const express = require('express');
 const cookie = require('cookie');
-const cookieSignature = require('cookie-signature');
 const router = express.Router();
 
 const {createUser, verifyUser} = require('../lib/model/user.model');
@@ -15,10 +14,6 @@ router.get('/register', (req, res) => {
 
 //登录
 router.post('/login', (req, res) => {
-    // console.log(req.headers.cookie);
-    // let cookies = cookie.parse(req.headers.cookie);
-    // console.log(cookies['cblog']);
-
     let username = req.body.username;
     let password = req.body.password;
     let user = {
@@ -68,7 +63,7 @@ router.get('/loggod', (req, res) => {
             res.send(req.session.user);
         }
     } else {
-        res.send(req.session.user);
+        res.send({});
     }
 });
 
@@ -79,5 +74,6 @@ router.get('/logout', function (req, res, next) {
     //删除Cookie
     res.clearCookie('user');
 });
+
 
 module.exports = router;
