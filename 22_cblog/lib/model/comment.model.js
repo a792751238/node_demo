@@ -21,8 +21,14 @@ function getCommentsById(articleid) {
         .exec();
 }
 
-function delCommentById(articleid) {
+function delCommentById(commentid) {
     return CommentModel
-        .findByIdAndRemove(articleid)
+        .findByIdAndRemove(commentid)
+        .exec();
+}
+
+function getCommentCount(articleid) {
+    return CommentModel
+        .count({articleid: articleid})
         .exec();
 }

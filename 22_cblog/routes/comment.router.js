@@ -11,6 +11,7 @@ const {
     delCommentById
 } = require('../lib/model/comment.model');
 
+//创建一条留言
 router.post('/', (req, res) => {
     let author = req.body.author;
     let content = req.body.content;
@@ -27,9 +28,9 @@ router.post('/', (req, res) => {
             result = contentToMarked(result);
             res.send(result);
         })
-
 });
 
+//通过文章id查找所有的留言
 router.get('/:articleid', (req, res) => {
     let articleid = req.params.articleid;
 
@@ -43,10 +44,11 @@ router.get('/:articleid', (req, res) => {
         });
 });
 
-router.delete('/:articleid', (req, res) => {
-    let articleid = req.params.articleid;
+//通过留言id，删除一条留言
+router.delete('/:commentid', (req, res) => {
+    let commentid = req.params.commentid;
 
-    delCommentById(articleid)
+    delCommentById(commentid)
         .then((result) => {
             res.send(result);
         })

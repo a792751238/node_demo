@@ -3,7 +3,8 @@
  */
 module.exports = {
     getPicAndSaved,
-    findPicById
+    findPicById,
+    findPic
 };
 
 const PictureModel = require('../schema/file.schema');
@@ -13,16 +14,19 @@ function getPicAndSaved(data) {
     let pic = {
         name: data.name,
         path: data.path,
-        filename:data.filename,
+        filename: data.filename,
         size: data.size,
         type: data.type,
         uploadDate: new Date()
     };
-
     return PictureModel.create(pic);
 }
 
 //通过id查找一张图片
-function findPicById (id) {
+function findPicById(id) {
     return PictureModel.findById(id).exec();
+}
+
+function findPic(name) {
+    return PictureModel.find({name: name}).exec();
 }

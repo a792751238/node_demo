@@ -13,7 +13,7 @@ const upload = multer({
     dest: uploadPath
 });
 
-const {getPicAndSaved, findPicById} = require('../lib/model/file.model');
+const {getPicAndSaved, findPicById, findPic} = require('../lib/model/file.model');
 
 //通过id返回一张图片
 router.get('/picture/:pic_id', (req, res) => {
@@ -41,18 +41,20 @@ router.get('/picture/:pic_id', (req, res) => {
 
 //上传一张图片并且保存在upload文件夹中
 router.post('/picture', upload.single('avatar'), (req, res) => {
-    let pic = {
-        name: req.file.originalname,
-        filename: req.file.filename,
-        path: req.file.destination,
-        size: req.file.size,
-        type: req.file.mimetype,
-    };
+    let pic = {};
+    pic.name = req.file.originalname;
+    pic.filename = req.file.filename;
+    pic.path = req.file.destination;
+    pic.size = req.file.size;
+    pic.type = req.file.mimetype;
+
 
     getPicAndSaved(pic)
-        .then((result) => {
+        .then(result => {
             res.send(result);
         });
+
+
 });
 
 module.exports = router;

@@ -3,7 +3,8 @@
  */
 module.exports = {
     createUser,
-    verifyUser
+    verifyUser,
+    findUserById
 };
 const fs = require('fs');
 const UserModel = require('../schema/user.schema');
@@ -32,4 +33,11 @@ function createUser(data) {
 
     return UserModel
         .create(user);
+}
+
+function findUserById(id) {
+    return UserModel
+        .findById(id)
+        .exec();
+
 }
