@@ -31,13 +31,28 @@ function createUser(data) {
         uploadDate: new Date()
     };
 
+    return _existUser(data.username)
+        .then(exist => {
+            if (exist && exist.length) throw {
+                code: 2,
+                message: 'user exist'
+            };
+            return UserModel
+                .create(user);
+
+        });
+
+}
+//注册用户时判断用户是否存在
+function _existUser(name) {
     return UserModel
-        .create(user);
+        .find({username: name})
+        .exec();
 }
 
+//通过id查找user
 function findUserById(id) {
     return UserModel
         .findById(id)
         .exec();
-
 }
