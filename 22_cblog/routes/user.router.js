@@ -99,7 +99,6 @@ function logged(req, res) {
         });
 }
 
-
 //退出账号，清空session,删除cookie
 function logout(req, res) {
     //清空session
