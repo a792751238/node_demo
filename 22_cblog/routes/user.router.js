@@ -50,6 +50,7 @@ function register(req, res) {
             message: 'name or password is null'
         };
     }
+
     const {username, password, description} = req.body;
 
     let user = {
@@ -57,7 +58,6 @@ function register(req, res) {
         password: password,
         description: description
     };
-
 
     //如果头像存在
     if (req.body.avatar) {
