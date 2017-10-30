@@ -29,7 +29,7 @@ function login(req, res) {
     return verifyUser(user)
         .then((result) => {
             _updateSession(result);
-            req.session.user = result;
+            // req.session.user = result;
             res.send(result);
         });
 
@@ -76,16 +76,18 @@ function register(req, res) {
 
 //登录验证
 function logged(req, res) {
+    console.log(req.session);
     const {user_id, username, password} = req.session;
+
 
     let info = {
         logged: false,
         user: null
     };
 
-    if (!username || !user_id || !password) {
-        return new Promise((resolve) => {
-            resolve(info);
+    if (!username || !user_id) {
+        return new Promise(() => {
+            return res.send(info);
         });
     }
 
@@ -107,9 +109,11 @@ function logout(req, res) {
         user_id
     } = req.session;
 
-    delete username;
-    delete password;
-    delete user_id;
+
+    delete req.session.username;
+    delete req.session.password;
+    delete req.session.user_id;
+    res.sendStatus(200);
 }
 
 module.exports = router;
