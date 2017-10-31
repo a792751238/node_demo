@@ -10,11 +10,13 @@ router.post('/login', login);
 router.post('/register', register);
 router.get('/logged', logged);
 router.get('/logout', logout);
+router.get('/authors', findAllAuthors);
 
 const {
     createUser,
     verifyUser,
-    findUserById
+    findUserById,
+    findUsers
 } = require('../lib/model/user.model');
 
 const {
@@ -116,5 +118,16 @@ function logout(req, res) {
     res.sendStatus(200);
 }
 
+
+//查找所有的用户
+function findAllAuthors(req, res) {
+    findUsers()
+        .then(authors => {
+            res.send(authors);
+        })
+        .catch(err => {
+            console.log(err);
+        });
+}
 module.exports = router;
 

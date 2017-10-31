@@ -4,7 +4,8 @@
 module.exports = {
     createUser,
     verifyUser,
-    findUserById
+    findUserById,
+    findUsers
 };
 const fs = require('fs');
 const UserModel = require('../schema/user.schema');
@@ -53,5 +54,12 @@ function _existUser(name) {
 function findUserById(id) {
     return UserModel
         .findById(id)
+        .exec();
+}
+
+//查找所有的user
+function findUsers() {
+    return UserModel
+        .find()
         .exec();
 }

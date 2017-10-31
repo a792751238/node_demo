@@ -32,8 +32,8 @@ function findPic(name) {
     return PictureModel.find({name: name}).exec();
 }
 
-function removePicture(id){
+function removePicture(id) {
     return PictureModel
-        .remove({_id:id})
+        .remove({_id: id})
         .exec();
 }
