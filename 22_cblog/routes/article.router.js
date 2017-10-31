@@ -3,7 +3,16 @@
  */
 const express = require('express');
 const router = express.Router();
-const {contentsToMarked, contentToMarked} = require('../utils/marked');
+
+router.post('/createArticle', addOneArticle);
+router.get('/articles/:page', getPageArticle);
+router.get('/article/:articleid', getOneArticle);
+router.delete('/article/:articleid', deleteOneArticle);
+
+const {
+    contentsToMarked,
+    contentToMarked
+} = require('../utils/marked');
 
 const {
     createArticle,
@@ -15,7 +24,7 @@ const {
 } = require('../lib/model/article.model');
 
 // POST /createArticle 创建一篇新文章
-router.post('/createArticle', (req, res) => {
+function addOneArticle(req, res) {
     let title = req.body.title;
     let content = req.body.content;
 
@@ -28,10 +37,10 @@ router.post('/createArticle', (req, res) => {
         result = contentToMarked(result);
         res.send(result);
     });
-});
+}
 
 // GET /articles 获取分页的文章
-router.get('/articles/:page', (req, res) => {
+function getPageArticle(req, res) {
     let page = req.params.page;
     getAllArticles(page)
         .then((results) => {
@@ -45,10 +54,11 @@ router.get('/articles/:page', (req, res) => {
                 res.send(obj);
             });
         });
-});
+}
+
 
 // GET  /article/:id 获取相应id号的文章
-router.get('/article/:articleid', (req, res) => {
+function getOneArticle(req, res) {
     let id = req.params.articleid;
 
     getOneArticleById(id)
@@ -59,14 +69,14 @@ router.get('/article/:articleid', (req, res) => {
         .catch((err) => {
             console.log(err);
         });
-});
+}
 
 // DELETE /article/:articleid 通过id删除一篇文章
-router.delete('/article/:articleid', (req, res) => {
+function deleteOneArticle(req, res) {
     let id = req.params.articleid;
     delOneArticleById(id).then((result) => {
         res.send(result);
     });
-});
+}
 
 module.exports = router;

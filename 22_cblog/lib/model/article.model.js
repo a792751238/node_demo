@@ -41,9 +41,6 @@ function getAllArticles(page) {
 
 //通过id获取一篇文章
 function getOneArticleById(article_id) {
-    // return ArticleModel
-    //     .findOne({_id: article_id})
-    //     .exec();
     return ArticleModel
         .findByIdAndUpdate(article_id, {$inc: {pv: 1}})
         .exec();

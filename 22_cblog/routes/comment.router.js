@@ -3,6 +3,11 @@
  */
 const express = require('express');
 const router = express.Router();
+
+router.post('/', addOneComment);
+router.get('/:articleid', findAllComment);
+router.delete('/:commentid', removeComment);
+
 const {contentsToMarked, contentToMarked} = require('../utils/marked');
 
 const {
@@ -12,7 +17,7 @@ const {
 } = require('../lib/model/comment.model');
 
 //创建一条留言
-router.post('/', (req, res) => {
+function addOneComment(req, res) {
     let author = req.body.author;
     let content = req.body.content;
     let articleid = req.body.articleid;
@@ -28,10 +33,11 @@ router.post('/', (req, res) => {
             result = contentToMarked(result);
             res.send(result);
         })
-});
+}
+
 
 //通过文章id查找所有的留言
-router.get('/:articleid', (req, res) => {
+function findAllComment(req, res) {
     let articleid = req.params.articleid;
 
     getCommentsById(articleid)
@@ -42,10 +48,11 @@ router.get('/:articleid', (req, res) => {
         .catch((error) => {
             console.log(error);
         });
-});
+}
+
 
 //通过留言id，删除一条留言
-router.delete('/:commentid', (req, res) => {
+function removeComment(req, res) {
     let commentid = req.params.commentid;
 
     delCommentById(commentid)
@@ -55,6 +62,6 @@ router.delete('/:commentid', (req, res) => {
         .catch((error) => {
             console.log(error);
         });
-});
+}
 
 module.exports = router;
