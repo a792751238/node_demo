@@ -9,10 +9,7 @@ router.get('/articles/:page', getPageArticle);
 router.get('/article/:articleid', getOneArticle);
 router.delete('/article/:articleid', deleteOneArticle);
 
-const {
-    contentsToMarked,
-    contentToMarked
-} = require('../utils/marked');
+const {marked} = require('../utils');
 
 const {
     createArticle,
@@ -22,6 +19,11 @@ const {
     getAllArticlesCount,
     increasePV
 } = require('../lib/model/article.model');
+
+
+const {
+    delCommentsById
+} = require('../lib/model/comment.model');
 
 // POST /createArticle 创建一篇新文章
 function addOneArticle(req, res) {
@@ -34,7 +36,7 @@ function addOneArticle(req, res) {
     };
 
     createArticle(article).then((result) => {
-        result = contentToMarked(result);
+        result = marked.contentToMarked(result);
         res.send(result);
     });
 }
@@ -46,7 +48,7 @@ function getPageArticle(req, res) {
         .then((results) => {
             //再获取分页所有的文章之后，再获取所有文章的总数
             getAllArticlesCount().then((num) => {
-                results = contentsToMarked(results);
+                results = marked.contentsToMarked(results);
                 let obj = {
                     articles: results,
                     count: num
@@ -63,7 +65,7 @@ function getOneArticle(req, res) {
 
     getOneArticleById(id)
         .then((result) => {
-            result = contentToMarked(result);
+            result = marked.contentToMarked(result);
             res.send(result);
         })
         .catch((err) => {
@@ -75,6 +77,8 @@ function getOneArticle(req, res) {
 function deleteOneArticle(req, res) {
     let id = req.params.articleid;
     delOneArticleById(id).then((result) => {
+        //删除文章后将文章下的留言也一并删除
+        delCommentsById(result._id);
         res.send(result);
     });
 }

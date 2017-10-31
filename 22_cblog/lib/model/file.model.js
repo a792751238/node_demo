@@ -4,7 +4,8 @@
 module.exports = {
     getPicAndSaved,
     findPicById,
-    findPic
+    findPic,
+    removePicture
 };
 
 const PictureModel = require('../schema/file.schema');
@@ -29,4 +30,10 @@ function findPicById(id) {
 
 function findPic(name) {
     return PictureModel.find({name: name}).exec();
+}
+
+function removePicture(id){
+    return PictureModel
+        .remove({_id:id})
+        .exec();
 }

@@ -39,7 +39,6 @@ function createUser(data) {
             };
             return UserModel
                 .create(user);
-
         });
 
 }

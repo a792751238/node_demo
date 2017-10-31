@@ -1,7 +1,12 @@
 /**
  * Created by easterCat on 2017/10/24.
  */
-var marked = require('marked');
+module.exports = {
+    contentsToMarked,
+    contentToMarked
+};
+
+const marked = require('marked');
 
 marked.setOptions({
     renderer: new marked.Renderer(),
@@ -13,11 +18,6 @@ marked.setOptions({
     smartLists: true,
     smarttpants: false
 });
-
-module.exports = {
-    contentsToMarked,
-    contentToMarked
-};
 
 /**
  * @Dec 将文章内容转化为markdown形式

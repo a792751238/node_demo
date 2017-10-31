@@ -8,13 +8,14 @@ router.post('/', addOneComment);
 router.get('/:articleid', findAllComment);
 router.delete('/:commentid', removeComment);
 
-const {contentsToMarked, contentToMarked} = require('../utils/marked');
+const {marked} = require('../utils');
 
 const {
     createComment,
     getCommentsById,
     delCommentById
 } = require('../lib/model/comment.model');
+
 
 //创建一条留言
 function addOneComment(req, res) {
@@ -30,7 +31,7 @@ function addOneComment(req, res) {
     };
     createComment(comment)
         .then((result) => {
-            result = contentToMarked(result);
+            result = marked.contentToMarked(result);
             res.send(result);
         })
 }
@@ -42,7 +43,7 @@ function findAllComment(req, res) {
 
     getCommentsById(articleid)
         .then((result) => {
-            result = contentsToMarked(result);
+            result = marked.contentsToMarked(result);
             res.send(result);
         })
         .catch((error) => {

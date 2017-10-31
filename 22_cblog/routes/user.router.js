@@ -17,6 +17,10 @@ const {
     findUserById
 } = require('../lib/model/user.model');
 
+const {
+    removePicture
+} = require('../lib/model/file.model');
+
 //登录
 function login(req, res) {
     const {username, password} = req.method === 'POST' ? req.body : req.query;
@@ -62,9 +66,16 @@ function register(req, res) {
     //如果头像存在
     if (req.body.avatar) {
         user.avatar = req.body.avatar;
-        createUser(user).then((result) => {
-            res.send(result);
-        });
+        createUser(user)
+            .then(result => {
+                res.send(result);
+            })
+            .catch(err => {
+                if (err) {
+                    removePicture(user.avatar);
+                    res.send(err);
+                }
+            });
     } else {
         user.avatar = null;
         createUser(user).then((result) => {
@@ -73,12 +84,9 @@ function register(req, res) {
     }
 }
 
-
 //登录验证
 function logged(req, res) {
-    console.log(req.session);
     const {user_id, username, password} = req.session;
-
 
     let info = {
         logged: false,
@@ -102,13 +110,6 @@ function logged(req, res) {
 //退出账号，清空session,删除cookie
 function logout(req, res) {
     //清空session
-    const {
-        username,
-        password,
-        user_id
-    } = req.session;
-
-
     delete req.session.username;
     delete req.session.password;
     delete req.session.user_id;

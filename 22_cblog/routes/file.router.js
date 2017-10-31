@@ -16,11 +16,11 @@ const upload = multer({
 router.post('/picture', upload.single('avatar'), savePicture);
 router.get('/picture/:pic_id', backPicture);
 
-
 const {
     getPicAndSaved,
     findPicById,
-    findPic
+    findPic,
+    removePicture
 } = require('../lib/model/file.model');
 
 //通过id返回一张图片
