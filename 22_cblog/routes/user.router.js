@@ -11,12 +11,14 @@ router.post('/register', register);
 router.get('/logged', logged);
 router.get('/logout', logout);
 router.get('/authors', findAllAuthors);
+router.post('/changeuser', updateUser);
 
 const {
     createUser,
     verifyUser,
     findUserById,
-    findUsers
+    findUsers,
+    update
 } = require('../lib/model/user.model');
 
 const {
@@ -128,6 +130,15 @@ function findAllAuthors(req, res) {
         .catch(err => {
             console.log(err);
         });
+}
+
+function updateUser(req, res) {
+    let user = req.body;
+    console.log(user);
+    update(user).then((result) => {
+
+        res.send(result);
+    });
 }
 module.exports = router;
 

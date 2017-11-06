@@ -9,7 +9,6 @@ router.get('/articles/:page', getPageArticle);
 router.get('/article/:articleid', getOneArticle);
 router.delete('/article/:articleid', deleteOneArticle);
 
-
 const {marked} = require('../utils');
 
 const {
@@ -20,7 +19,6 @@ const {
     getAllArticlesCount,
     increasePV
 } = require('../lib/model/article.model');
-
 
 const {
     delCommentsById

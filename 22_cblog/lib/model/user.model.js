@@ -5,7 +5,8 @@ module.exports = {
     createUser,
     verifyUser,
     findUserById,
-    findUsers
+    findUsers,
+    update
 };
 const fs = require('fs');
 const UserModel = require('../schema/user.schema');
@@ -61,5 +62,11 @@ function findUserById(id) {
 function findUsers() {
     return UserModel
         .find()
+        .exec();
+}
+
+function update(data) {
+    return UserModel
+        .findOneAndUpdate({_id: data.id}, data, {new: true})
         .exec();
 }
