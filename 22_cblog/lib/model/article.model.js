@@ -13,14 +13,26 @@ module.exports = {
 const ArticleModel = require('../schema/article.schema');
 
 //创建一篇文章
-function createArticle(data, res) {
+function createArticle(data = {}) {
+    const {title, content} = data;
     let article = {
-        title: data.title,
-        content: data.content,
+        title: title,
+        content: content,
         createDate: new Date()
     };
+
     return ArticleModel
-        .create(article);
+        .queryOne({title})
+        .then(result => {
+            if (result) return result;
+            return ArticleModel.add(article);
+        })
+        .then(result => {
+            console.log('find the result is:', result);
+            return ArticleModel.updateById(result._id, {checkinTime: Date.now()})
+        });
+    // return ArticleModel
+    //     .create(article);
 }
 
 //获取查询分页的文章
@@ -31,6 +43,7 @@ function getAllArticles(page) {
     let condition = {};                 //条件
     let skipnum = (currentPage - 1) * pageSize;   //跳过数
 
+    console.log(ArticleModel);
     return ArticleModel
         .find(condition)
         .skip(skipnum)

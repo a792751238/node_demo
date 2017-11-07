@@ -34,10 +34,12 @@ function addOneArticle(req, res) {
         content: content
     };
 
-    createArticle(article).then((result) => {
-        result = marked.contentToMarked(result);
-        res.send(result);
-    });
+    let back = createArticle(article);
+    res.send(back);
+    // createArticle(article).then((result) => {
+    //     result = marked.contentToMarked(result);
+    //     res.send(result);
+    // });
 }
 
 // GET /articles 获取分页的文章

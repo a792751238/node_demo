@@ -4,5 +4,6 @@
 
 module.exports = {
     marked: require('./marked'),
-
+    bindMethods: require('./bindMethods'),
+    methods: require('./methods'),
 };
