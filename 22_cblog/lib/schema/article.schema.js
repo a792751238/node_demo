@@ -28,10 +28,13 @@ let ArticleSchema = new Schema({
 });
 
 function allKeys() {
-    return _.without(_.keys(serverSchema.paths), '__v');
+    //_.keys将对象的可枚举属性返回到一个数组里
+    //返回一个新数组将相同数值排除，也就是排除__v属性
+    return _.without(_.keys(ArticleSchema.paths), '__v');
 }
 
 ArticleSchema.methods.view = function () {
+    //根据选择的属性值返回一个新的对象
     return _.pick(this, allKeys());
 };
 

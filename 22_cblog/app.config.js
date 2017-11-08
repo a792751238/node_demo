@@ -7,3 +7,4 @@ module.exports = {
     publicPath: path.join(__dirname, './public/dist'),
     uploadPath: path.join(__dirname, './upload/picture'),
 };
+

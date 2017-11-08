@@ -5,11 +5,11 @@ const express = require('express');
 const router = express.Router();
 
 router.post('/createArticle', addOneArticle);
-router.get('/articles/:page', getPageArticle);
+router.get('/articles', getPageArticle);
 router.get('/article/:articleid', getOneArticle);
 router.delete('/article/:articleid', deleteOneArticle);
 
-const {marked} = require('../utils');
+const {marked, queryFilter} = require('../utils');
 
 const {
     createArticle,
@@ -34,31 +34,32 @@ function addOneArticle(req, res) {
         content: content
     };
 
-    let back = createArticle(article);
-    res.send(back);
-    // createArticle(article).then((result) => {
-    //     result = marked.contentToMarked(result);
-    //     res.send(result);
-    // });
+    createArticle(article).then((result) => {
+        result = marked.contentToMarked(result);
+        res.send(result);
+    });
 }
 
 // GET /articles 获取分页的文章
 function getPageArticle(req, res) {
-    let page = req.params.page;
-    getAllArticles(page)
-        .then((results) => {
-            //再获取分页所有的文章之后，再获取所有文章的总数
-            getAllArticlesCount().then((num) => {
-                results = marked.contentsToMarked(results);
-                let obj = {
-                    articles: results,
-                    count: num
-                };
-                res.send(obj);
-            });
+    let filter = queryFilter(req);
+
+    return Promise.all([
+        getAllArticlesCount(),
+        getAllArticles(filter)
+    ])
+        .then(results => {
+            let result = marked.contentsToMarked(results[1]);
+            let obj = {
+                articles: result,
+                count: results[0]
+            };
+            res.send(obj);
+        })
+        .catch(err => {
+            console.log('getPageArticle is error : ', err);
         });
 }
-
 
 // GET  /article/:id 获取相应id号的文章
 function getOneArticle(req, res) {
@@ -67,6 +68,12 @@ function getOneArticle(req, res) {
     getOneArticleById(id)
         .then((result) => {
             result = marked.contentToMarked(result);
+            return result;
+        })
+        .then(result => {
+            return increasePV(result._id);
+        })
+        .then(result => {
             res.send(result);
         })
         .catch((err) => {

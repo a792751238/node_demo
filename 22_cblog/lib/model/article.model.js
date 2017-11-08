@@ -15,66 +15,47 @@ const ArticleModel = require('../schema/article.schema');
 //创建一篇文章
 function createArticle(data = {}) {
     const {title, content} = data;
+
+    if (!title) throw new Error('title is null');
+    if (!content) throw new Error('content is null');
+
     let article = {
         title: title,
         content: content,
-        createDate: new Date()
+        createDate: new Date(),
+        checkinTime: new Date(),
     };
 
     return ArticleModel
         .queryOne({title})
         .then(result => {
+            //如果查找到的数据存在，就直接返回
             if (result) return result;
             return ArticleModel.add(article);
-        })
-        .then(result => {
-            console.log('find the result is:', result);
-            return ArticleModel.updateById(result._id, {checkinTime: Date.now()})
         });
-    // return ArticleModel
-    //     .create(article);
 }
 
 //获取查询分页的文章
-function getAllArticles(page) {
-    let pageSize = 10;                   //一页多少条
-    let currentPage = page;                //当前第几页
-    let sort = {'createDate': -1};        //排序（按创建时间倒序）
-    let condition = {};                 //条件
-    let skipnum = (currentPage - 1) * pageSize;   //跳过数
-
-    console.log(ArticleModel);
-    return ArticleModel
-        .find(condition)
-        .skip(skipnum)
-        .limit(pageSize)
-        .sort(sort)
-        .exec();
+function getAllArticles(filter) {
+    filter.where = filter.where || {};
+    return ArticleModel.applyFilter(filter);
 }
 
 //通过id获取一篇文章
 function getOneArticleById(article_id) {
-    return ArticleModel
-        .findByIdAndUpdate(article_id, {$inc: {pv: 1}})
-        .exec();
+    return ArticleModel.queryById(article_id);
 }
 
 //通过id删除一篇文章
 function delOneArticleById(id) {
-    return ArticleModel
-        .findByIdAndRemove(id)
-        .exec();
+    return ArticleModel.removeById(id);
 }
 
 //获取所有的数据总数
 function getAllArticlesCount() {
-    return ArticleModel
-        .count({})
-        .exec();
+    return ArticleModel.getCount();
 }
 
 function increasePV(id) {
-    return ArticleModel
-        .update({_id: id}, {$inc: {pv: 1}})
-        .exec();
+    return ArticleModel.updateById(id, {$inc: {pv: 1}});
 }
