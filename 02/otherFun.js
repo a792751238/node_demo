@@ -15,12 +15,11 @@
 
 module.exports = {
     controller: (request, response) => {
-        console.log('welcome');
-        response.write('welcome');
-
+        console.log("welcome");
+        response.write("welcome");
     },
     call: (request, response) => {
-        console.log('end');
-        response.end('函数');
+        console.log("end");
+        response.end("函数");
     }
 };

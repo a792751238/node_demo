@@ -7,8 +7,8 @@ function User(id, name, age) {
     this.name = name;
     this.age = age;
     this.enter = () => {
-        console.log('user的图书馆');
-    }
+        console.log("user的图书馆");
+    };
 }
 
 module.exports = User;

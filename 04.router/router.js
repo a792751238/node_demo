@@ -3,12 +3,9 @@
  */
 module.exports = {
     login: (request, response) => {
-        console.log('login');
-        response.write('login');
+        response.write("login");
     },
     register: (request, response) => {
-        console.log('register');
-        response.write('register');
+        response.write("register");
     }
 };
-
