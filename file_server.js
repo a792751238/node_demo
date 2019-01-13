@@ -1,9 +1,9 @@
-const fs = require('fs'),
-    url = require('url'),
-    path = require('path'),
-    http = require('http');
+const fs = require("fs"),
+    url = require("url"),
+    path = require("path"),
+    http = require("http");
 
-let root = path.resolve(process.argv[2] || '.');
+let root = path.resolve(process.argv[2] || ".");
 console.log(`static root dir ${root}`);
 
 let server = http.createServer((request, response) => {
@@ -11,7 +11,7 @@ let server = http.createServer((request, response) => {
     let filepath = path.join(root, pathname);
     console.log(`pathname is ${pathname}`);
     console.log(`filepath is ${filepath}`);
-    fs.stat(filepath, function (err, stats) {
+    fs.stat(filepath, function(err, stats) {
         if (!err && stats.isFile()) {
             console.log(`200 ${request.url}`);
             response.writeHead(200);
@@ -21,7 +21,7 @@ let server = http.createServer((request, response) => {
             response.writeHead(404);
             response.end(`404 not found`);
         }
-    })
+    });
 });
 
 server.listen(4444);
